@@ -1,4 +1,4 @@
-package com.example.virtualwardrobe.screens.auth;
+package com.example.virtualwardrobe.screens.signin.signup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
