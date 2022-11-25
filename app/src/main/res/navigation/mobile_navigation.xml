@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.virtualwardrobe.ui.profile.ProfileFragment"
+        android:name="com.example.virtualwardrobe.screens.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.virtualwardrobe.ui.dashboard.MainFragment"
+        android:name="com.example.virtualwardrobe.screens.dashboard.MainFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_wardrobe"
-        android:name="com.example.virtualwardrobe.ui.wardrobe.WardrobeFragment"
+        android:name="com.example.virtualwardrobe.screens.wardrobe.WardrobeFragment"
         android:label="@string/title_wardrobe"
         tools:layout="@layout/fragment_wardrobe" />
 </navigation>

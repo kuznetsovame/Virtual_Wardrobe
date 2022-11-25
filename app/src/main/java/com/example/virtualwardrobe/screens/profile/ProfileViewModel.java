@@ -1,4 +1,4 @@
-package com.example.virtualwardrobe.ui.profile;
+package com.example.virtualwardrobe.screens.profile;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

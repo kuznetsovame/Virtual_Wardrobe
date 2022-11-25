@@ -1,4 +1,4 @@
-package com.example.virtualwardrobe;
+package com.example.virtualwardrobe.screens;
 
 import android.os.Bundle;
 
@@ -12,6 +12,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.virtualwardrobe.R;
 
 
 public class ConstractClothes extends Fragment {

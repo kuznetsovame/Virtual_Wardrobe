@@ -1,7 +1,8 @@
-package com.example.virtualwardrobe;
+package com.example.virtualwardrobe.screens;
 
 import android.os.Bundle;
 
+import com.example.virtualwardrobe.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;

@@ -1,4 +1,4 @@
-package com.example.virtualwardrobe.ui.dashboard;
+package com.example.virtualwardrobe.screens.dashboard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

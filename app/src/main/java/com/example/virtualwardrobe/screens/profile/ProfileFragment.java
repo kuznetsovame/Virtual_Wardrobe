@@ -1,4 +1,4 @@
-package com.example.virtualwardrobe.ui.profile;
+package com.example.virtualwardrobe.screens.profile;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

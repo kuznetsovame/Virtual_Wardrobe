@@ -1,4 +1,4 @@
-package com.example.virtualwardrobe.ui.list;
+package com.example.virtualwardrobe.screens.list;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;

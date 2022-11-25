@@ -1,4 +1,4 @@
-package com.example.virtualwardrobe.ui.dashboard;
+package com.example.virtualwardrobe.screens.dashboard;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
