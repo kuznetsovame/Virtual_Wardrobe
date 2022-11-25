@@ -1,4 +1,4 @@
-package com.example.virtualwardrobe.screens;
+package com.example.virtualwardrobe.screens.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.virtualwardrobe.R;
+import com.example.virtualwardrobe.screens.MenuActivity;
 
 public class SignUpActivity extends AppCompatActivity {
 

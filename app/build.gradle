@@ -1,6 +1,11 @@
 plugins {
     id 'com.android.application'
+
+
+
 }
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.dagger.hilt.android'
 
 android {
     namespace 'com.example.virtualwardrobe'
@@ -62,5 +67,7 @@ dependencies {
     //rxjava
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
     implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
+
+    implementation 'org.jsoup:jsoup:1.13.1'
 
 }

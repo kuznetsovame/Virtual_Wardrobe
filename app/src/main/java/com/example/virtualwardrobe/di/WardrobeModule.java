@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.example.virtualwardrobe.R;
+import com.example.virtualwardrobe.network.WardrobeApi;
 
 import javax.inject.Singleton;
 
@@ -20,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 @InstallIn(SingletonComponent.class)
-class WardrobeModule {
+public class WardrobeModule {
     @Provides
     @Singleton
     public SharedPreferences providesSharedPreferences(@ApplicationContext Context context) {
@@ -66,12 +67,18 @@ class WardrobeModule {
 
     @Provides
     @Singleton
-
     public Retrofit wardrobeApi(OkHttpClient okHttpClient) {
       return  new Retrofit.Builder()
                 .baseUrl("")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+    }
+
+    @Provides
+    @Singleton
+    public WardrobeApi provideQuestGoApi(Retrofit retrofit)
+    {
+       return  retrofit.create(WardrobeApi.class);
     }
 }
