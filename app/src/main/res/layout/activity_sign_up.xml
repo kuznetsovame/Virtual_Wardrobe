@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#A4DAEF"
-    tools:context=".screens.auth.SignUpActivity">
+    tools:context=".screens.signup.SignUpActivity">
 
     <TextView
         android:id="@+id/show"
@@ -25,8 +25,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="64dp"
         android:orientation="vertical"
-        android:padding="12dp
-"
+        android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/show">
@@ -40,6 +39,15 @@
             android:hint="Mail"
             android:inputType="textPersonName" />
 
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Password"
+            android:inputType="textPassword" />
+
         <EditText
             android:id="@+id/login"
             android:layout_width="match_parent"
@@ -48,21 +56,12 @@
             android:hint="Login"
             android:inputType="textPersonName" />
 
-
         <EditText
             android:id="@+id/confirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:hint="Confirm your password"
-            android:inputType="textPassword" />
-
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:hint="Password"
             android:inputType="textPassword" />
 
         <Button

@@ -8,11 +8,10 @@ import retrofit2.http.POST;
 public interface WardrobeApi {
 
     @POST("/user/reg")
-
     void regUser(User user);
 
-    @GET("/user/auth")
-    User authUser(User user);
+    @POST("/user/auth")
+    String authUser(User user);
 
     @GET("/user/getUserById/{id}")
     User getUserById(int id);

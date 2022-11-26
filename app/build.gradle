@@ -61,6 +61,7 @@ dependencies {
     //hilt
     implementation 'com.google.dagger:hilt-android:2.44.2'
     annotationProcessor 'com.google.dagger:hilt-compiler:2.44.2'
+
     //OkHttp interceptor
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 

@@ -64,12 +64,11 @@ public class WardrobeModule {
                 .build();
     }
 
-
     @Provides
     @Singleton
     public Retrofit wardrobeApi(OkHttpClient okHttpClient) {
       return  new Retrofit.Builder()
-                .baseUrl("")
+                .baseUrl("https://questgotest.getsandbox.com:443")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -77,8 +76,10 @@ public class WardrobeModule {
 
     @Provides
     @Singleton
-    public WardrobeApi provideQuestGoApi(Retrofit retrofit)
+    public WardrobeApi wardrobeProvide(Retrofit retrofit)
     {
        return  retrofit.create(WardrobeApi.class);
     }
+
+
 }
