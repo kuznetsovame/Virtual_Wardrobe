@@ -3,13 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_profile">
+    app:startDestination="@id/navigation_dashboard">
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.virtualwardrobe.screens.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <argument
+            android:name="user"
+            app:argType="com.example.virtualwardrobe.model.User" />
+        <argument
+            android:name="type"
+            app:argType="com.example.virtualwardrobe.screens.profile.ProfileType" />
+        <action
+            android:id="@+id/action_navigation_profile_to_list_Fragment"
+            app:destination="@id/list_Fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -22,4 +32,15 @@
         android:name="com.example.virtualwardrobe.screens.wardrobe.WardrobeFragment"
         android:label="@string/title_wardrobe"
         tools:layout="@layout/fragment_wardrobe" />
+    <fragment
+        android:id="@+id/list_Fragment"
+        android:name="com.example.virtualwardrobe.screens.list.List_Fragment"
+        tools:layout="@layout/fragment_list_">
+        <action
+            android:id="@+id/action_list_Fragment_to_navigation_profile"
+            app:destination="@id/navigation_profile" />
+        <argument
+            android:name="friends"
+            app:argType="com.example.virtualwardrobe.model.User[]" />
+    </fragment>
 </navigation>
