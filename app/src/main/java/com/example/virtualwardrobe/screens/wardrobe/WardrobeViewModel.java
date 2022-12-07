@@ -20,6 +20,9 @@ public class WardrobeViewModel extends ViewModel {
         clothes = new MutableLiveData<>();
 
         clothes.setValue(new ArrayList<>());
+        for(int i =0; i< 5; i++)
+         clothes.getValue().add(new Clothes("name" +i, "" ,"desasdasdasdasdasdasdasdas" + i, "2"));
+
 
         mText.setValue("This is notifications fragment");
     }
@@ -30,6 +33,11 @@ public class WardrobeViewModel extends ViewModel {
 
     public void save(){
         //TODO
+    }
+
+    public void addCloth(Clothes clothes)
+    {
+        this.clothes.getValue().add(clothes);
     }
 
     public boolean isCorrect()

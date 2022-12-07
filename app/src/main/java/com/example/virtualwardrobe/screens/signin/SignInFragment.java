@@ -40,8 +40,8 @@ public class SignInFragment extends Fragment {
 
         binding.button.setOnClickListener(view ->
         {
-            viewModel.auth(binding.login.getText().toString(),binding.password.getText().toString());
-            //activity.show();
+          //  viewModel.auth(binding.login.getText().toString(),binding.password.getText().toString());
+            activity.show();
         });
 
         return binding.getRoot();

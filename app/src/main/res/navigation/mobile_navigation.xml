@@ -27,7 +27,12 @@
         android:id="@+id/navigation_wardrobe"
         android:name="com.example.virtualwardrobe.screens.wardrobe.WardrobeFragment"
         android:label="@string/title_wardrobe"
-        tools:layout="@layout/fragment_wardrobe" />
+        tools:layout="@layout/fragment_wardrobe" >
+        <action
+            android:id="@+id/action_navigation_wardrobe_to_addClothe"
+            app:destination="@id/addClothe"
+            app:launchSingleTop="true" />
+    </fragment>
     <fragment
         android:id="@+id/list_Fragment"
         android:name="com.example.virtualwardrobe.screens.list.List_Fragment"
@@ -41,4 +46,13 @@
         android:name="com.example.virtualwardrobe.screens.dashboard.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/addClothe"
+        android:name="com.example.virtualwardrobe.AddClothe"
+        android:label="fragment_add_clothe"
+        tools:layout="@layout/fragment_add_clothe" >
+        <action
+            android:id="@+id/action_addClothe_to_navigation_wardrobe"
+            app:destination="@id/navigation_wardrobe" />
+    </fragment>
 </navigation>

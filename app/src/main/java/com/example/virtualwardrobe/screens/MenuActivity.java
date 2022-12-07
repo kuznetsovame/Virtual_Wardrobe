@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.example.virtualwardrobe.R;
 import com.example.virtualwardrobe.model.User;
 import com.example.virtualwardrobe.screens.profile.ProfileType;
+import com.example.virtualwardrobe.screens.startactivity.StartActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +19,7 @@ import com.example.virtualwardrobe.databinding.ActivityMenuBinding;
 public class MenuActivity extends AppCompatActivity {
 
     private ActivityMenuBinding binding;
-
+    StartActivity startActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +38,6 @@ public class MenuActivity extends AppCompatActivity {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                R.id.mainFragment, R.id.navigation_wardrobe,R.id.navigation_profile)
                 .build();
-
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_menu);
         navController.navigate(R.id.navigation_profile, bundle);
         NavigationUI.setupWithNavController(binding.navView, navController);

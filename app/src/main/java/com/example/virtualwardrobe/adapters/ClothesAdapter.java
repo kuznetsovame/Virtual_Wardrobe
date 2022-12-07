@@ -17,7 +17,7 @@ import com.example.virtualwardrobe.model.Clothes;
 import java.util.List;
 
 public class ClothesAdapter extends RecyclerView.Adapter {
-    Context context;
+
     List<Clothes> list;
 
     class MyHolderView extends RecyclerView.ViewHolder {
@@ -35,8 +35,8 @@ public class ClothesAdapter extends RecyclerView.Adapter {
         ImageView photo;
     }
 
-    public ClothesAdapter(Context context, List<Clothes> list) {
-        this.context = context;
+    public ClothesAdapter(  List<Clothes> list) {
+
         this.list = list;
 
     }
@@ -44,8 +44,7 @@ public class ClothesAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.clothes_card, parent);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.clothes_card, parent,false);
         return new MyHolderView(view);
     }
 

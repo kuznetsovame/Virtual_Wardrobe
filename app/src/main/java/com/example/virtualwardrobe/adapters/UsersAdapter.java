@@ -31,8 +31,6 @@ public class UsersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-
         return new RecyclerView.ViewHolder(
                 LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.friend_card, parent, false))
