@@ -23,7 +23,7 @@ public class SingUpViewModel extends ViewModel {
         user.mail = mail;
         user.password = pass;
 
-        String  hash =  wardrobeApi.authUser(user);
+        String  hash =  "";
 
         return !hash.isEmpty();
     }

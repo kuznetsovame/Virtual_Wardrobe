@@ -35,13 +35,11 @@ public class MenuActivity extends AppCompatActivity {
         bundle.putSerializable("type", ProfileType.MAIN_USER);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-               R.id.navigation_dashboard, R.id.navigation_wardrobe,R.id.navigation_profile)
+               R.id.mainFragment, R.id.navigation_wardrobe,R.id.navigation_profile)
                 .build();
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_menu);
         navController.navigate(R.id.navigation_profile, bundle);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
-
 }

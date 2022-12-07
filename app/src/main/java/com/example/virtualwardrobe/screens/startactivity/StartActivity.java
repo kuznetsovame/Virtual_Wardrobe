@@ -1,12 +1,15 @@
-package com.example.virtualwardrobe;
+package com.example.virtualwardrobe.screens.startactivity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.virtualwardrobe.R;
 import com.example.virtualwardrobe.databinding.ActivityStartBinding;
 import com.example.virtualwardrobe.screens.MenuActivity;
 import com.example.virtualwardrobe.screens.signin.SignInFragment;
@@ -17,7 +20,8 @@ public class StartActivity extends AppCompatActivity implements SignInFragment.o
 
     private SignInFragment signIn;
     private SignUpFragment signUp;
-    private  ActivityStartBinding binding;
+    private ActivityStartBinding binding;
+    private StartViewModel viewModel;
 
     @SuppressLint("CommitTransaction")
     @Override
@@ -25,6 +29,8 @@ public class StartActivity extends AppCompatActivity implements SignInFragment.o
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
+
+        viewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) new ModelFactory()).get(StartViewModel.class);
         if (savedInstanceState == null) {
             signIn = SignInFragment.newInstance(this);
             signUp = SignUpFragment.newInstance(this);
@@ -35,9 +41,7 @@ public class StartActivity extends AppCompatActivity implements SignInFragment.o
                     .show(signIn)
                     .hide(signUp)
                     .commit();
-        }
-        else
-        {
+        } else {
             signIn = (SignInFragment) getSupportFragmentManager().findFragmentByTag("signIn");
             signUp = (SignUpFragment) getSupportFragmentManager().findFragmentByTag("signUp");
         }
@@ -52,7 +56,8 @@ public class StartActivity extends AppCompatActivity implements SignInFragment.o
     }
 
     @Override
-    public void onClickSignIn() {
+    public void onClickSignIn( ) {
+
         getSupportFragmentManager().beginTransaction()
                 .show(signIn)
                 .hide(signUp)

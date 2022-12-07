@@ -13,15 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.virtualwardrobe.R;
 import com.example.virtualwardrobe.databinding.FragmentSignInBinding;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SignInFragment extends Fragment {
 
-    private SignInViewModel mViewModel;
+    private SignInViewModel viewModel;
     private onClickSignUp activity;
     private FragmentSignInBinding binding;
 
@@ -38,20 +34,14 @@ public class SignInFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         binding = FragmentSignInBinding.inflate(inflater, container, false);
-        mViewModel = new ViewModelProvider(this).get(SignInViewModel.class);
+        viewModel = new ViewModelProvider(this).get(SignInViewModel.class);
 
-        binding.singup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.onClickSignUp();
-            }
-        });
+        binding.singup.setOnClickListener(view -> activity.onClickSignUp());
 
-        binding.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.show();
-            }
+        binding.button.setOnClickListener(view ->
+        {
+            viewModel.auth(binding.login.getText().toString(),binding.password.getText().toString());
+            //activity.show();
         });
 
         return binding.getRoot();

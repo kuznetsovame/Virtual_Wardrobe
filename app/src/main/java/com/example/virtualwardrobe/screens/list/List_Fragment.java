@@ -7,24 +7,22 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.virtualwardrobe.R;
-import com.example.virtualwardrobe.adapters.ClothesAdapter;
 import com.example.virtualwardrobe.adapters.UsersAdapter;
-import com.example.virtualwardrobe.model.Clothes;
 import com.example.virtualwardrobe.model.User;
+import com.example.virtualwardrobe.screens.profile.ProfileType;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-public class List_Fragment extends Fragment {
+public class List_Fragment extends Fragment implements UsersAdapter.OnClick{
     private RecyclerView recyclerView;
     private ListViewModel mViewModel;
 
@@ -40,14 +38,32 @@ public class List_Fragment extends Fragment {
         recyclerView = root.findViewById(R.id.recyclerView);
 
         mViewModel = new ViewModelProvider(this).get(ListViewModel.class);
-        User fr[]  = (User[]) getArguments().getParcelableArray("friends");
+        User fr[] = (User[]) getArguments().getParcelableArray("friends");
 
-        UsersAdapter usersAdapter = new UsersAdapter(getContext(), Arrays.asList(fr));
+        UsersAdapter usersAdapter = new UsersAdapter(Arrays.asList(fr),this);
 
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(usersAdapter);
+
 
         return root;
     }
 
 
+
+
+    @Override
+    public void onClickUserCard(User user) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("user",user);
+        bundle.putSerializable("type", ProfileType.ANY_USER);
+        Navigation.findNavController(getView()).navigate(R.id.navigation_profile, bundle);
+
+    }
+
+    @Override
+    public void onClickAddUser(User user) {
+
+    }
 }

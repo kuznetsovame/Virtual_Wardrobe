@@ -14,6 +14,7 @@ import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 import dagger.hilt.components.SingletonComponent;
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -67,18 +68,18 @@ public class WardrobeModule {
     @Provides
     @Singleton
     public Retrofit wardrobeApi(OkHttpClient okHttpClient) {
-      return  new Retrofit.Builder()
-                .baseUrl("https://questgotest.getsandbox.com:443")
+        return new Retrofit.Builder()
+                .baseUrl("http://192.168.55.104:8080")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build();
     }
 
     @Provides
     @Singleton
-    public WardrobeApi wardrobeProvide(Retrofit retrofit)
-    {
-       return  retrofit.create(WardrobeApi.class);
+    public WardrobeApi wardrobeProvide(Retrofit retrofit) {
+        return retrofit.create(WardrobeApi.class);
     }
 
 

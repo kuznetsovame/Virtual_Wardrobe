@@ -44,12 +44,15 @@ public class ProfileFragment extends Fragment {
         binding.linearLayout2.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
             ArrayList<User> newArray = viewModel.getFriends().getValue();
+
             User user[] = new User[newArray.size()];
             int i=0;
+
             for (User u : newArray) {
                 user[i] = u;
                 i++;
             }
+
             bundle.putParcelableArray("friends", user);
             Navigation.findNavController(root).navigate(R.id.list_Fragment, bundle);
             //Navigation.findNavController(this, R.id.nav_host_fragment_activity_menu);
@@ -63,6 +66,9 @@ public class ProfileFragment extends Fragment {
 
 
     private void setType(ProfileType type) {
+        if(type== null)
+            return;
+
         switch (type) {
             case ANY_USER:
 

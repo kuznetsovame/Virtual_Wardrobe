@@ -64,4 +64,6 @@ public class ClothesAdapter extends RecyclerView.Adapter {
     public int getItemCount() {
         return list.size();
     }
+
+
 }

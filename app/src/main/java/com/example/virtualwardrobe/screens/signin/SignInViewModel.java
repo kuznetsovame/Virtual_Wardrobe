@@ -23,9 +23,9 @@ public class SignInViewModel extends ViewModel {
         user.mail = mail;
         user.password = pass;
 
-        String  hash =  wardrobeApi.authUser(user);
+        wardrobeApi.authUser(user);
 
-        return !hash.isEmpty();
+        return true;
     }
 
 }
