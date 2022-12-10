@@ -11,6 +11,7 @@ import android.os.Bundle;
 
 import com.example.virtualwardrobe.R;
 import com.example.virtualwardrobe.databinding.ActivityStartBinding;
+import com.example.virtualwardrobe.model.User;
 import com.example.virtualwardrobe.screens.MenuActivity;
 import com.example.virtualwardrobe.screens.signin.SignInFragment;
 import com.example.virtualwardrobe.screens.signup.SignUpFragment;
@@ -65,8 +66,14 @@ public class StartActivity extends AppCompatActivity implements SignInFragment.o
     }
 
     @Override
-    public void show() {
-        startActivity(new Intent(this, MenuActivity.class));
+    public void show(User user) {
+        Bundle b = new Bundle();
+        b.putParcelable("user", user);
+
+        Intent intent =new Intent(this, MenuActivity.class);
+        intent.putExtra("user_bundle",user);
+
+        startActivity(intent);
         finish();
     }
 }

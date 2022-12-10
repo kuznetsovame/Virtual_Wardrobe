@@ -3,11 +3,16 @@ package com.example.virtualwardrobe.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class User implements Parcelable {
-    public String mail;
+    @SerializedName("username")
     public String username;
+    @SerializedName("email")
+    public String mail;
+    @SerializedName("password")
     public String password;
 
     public String getMail() {

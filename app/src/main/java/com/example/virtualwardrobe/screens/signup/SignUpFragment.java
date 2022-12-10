@@ -12,18 +12,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.virtualwardrobe.R;
+import com.example.virtualwardrobe.WardrobeApplication;
+import com.example.virtualwardrobe.databinding.FragmentProfileBinding;
+import com.example.virtualwardrobe.databinding.FragmentSignUpBinding;
 import com.example.virtualwardrobe.screens.signin.SignInFragment;
 
 public class SignUpFragment extends Fragment {
 
-    EditText login;
-    EditText password;
-    EditText confirm;
-    Button button;
-    TextView singup;
+
    private SignInOnClick activity;
 
     private SingUpViewModel viewModel;
+
+    private FragmentSignUpBinding binding;
+
 
     public SignUpFragment(SignInOnClick activity) {
         this.activity = activity;
@@ -35,41 +37,37 @@ public class SignUpFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_sign_up, container, false);
+
         viewModel = new ViewModelProvider(this).get(SingUpViewModel.class);
 
+        binding = FragmentSignUpBinding.inflate(inflater, container, false);
 
-        login = root.findViewById(R.id.login);
-        password = root.findViewById(R.id.password);
-        button = root.findViewById(R.id.button);
-        confirm = root.findViewById(R.id.confirm);
-        root.findViewById(R.id.signIn).setOnClickListener(new View.OnClickListener() {
+
+        binding.signIn.findViewById(R.id.signIn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 activity.onClickSignIn();
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
+        WardrobeApplication application = (WardrobeApplication) getActivity().getApplication();
 
-            @Override
-            public void onClick(View view) {
-                if (checkLogPas()) {
-                    if (viewModel.reg(login.getText().toString(), password.getText().toString())) {
 
-                    }
+        binding.button.setOnClickListener(view -> {
+            if (checkLogPas()) {
+                if (viewModel.reg(application.getWardrobeApi(), binding.login.getText().toString(), binding.password.getText().toString(),binding.mail.getText().toString())) {
 
                 }
             }
         });
 
-        return root;
+        return binding.getRoot();
     }
 
     private boolean checkLogPas() {
-        if (password.getText().length() < 6 && password.getText().length() > 20)
+        if (binding.password.getText().length() < 6 && binding.password.getText().length() > 20)
             return false;
-        if(!confirm.getText().toString().equals(password.getText().toString()))
+        if(!binding.confirm.getText().toString().equals(binding.password.getText().toString()))
             return false;
 
         //TODO:  eMail

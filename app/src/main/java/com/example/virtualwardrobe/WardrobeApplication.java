@@ -11,6 +11,10 @@ import retrofit2.Retrofit;
 
 @HiltAndroidApp
 public class WardrobeApplication extends Application {
+    public WardrobeApi getWardrobeApi() {
+        return wardrobeApi;
+    }
+
     @Inject
     WardrobeApi wardrobeApi;
 

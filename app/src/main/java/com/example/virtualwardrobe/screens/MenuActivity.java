@@ -31,9 +31,10 @@ public class MenuActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
 
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("user", new User("Timur Leshinin","Timur Leshinin"));
+        Bundle arguments = getIntent().getExtras();
+        Bundle bundle = new Bundle() ;
         bundle.putSerializable("type", ProfileType.MAIN_USER);
+        bundle.putParcelable("user",(User) arguments.get("user_bundle"));
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                R.id.mainFragment, R.id.navigation_wardrobe,R.id.navigation_profile)

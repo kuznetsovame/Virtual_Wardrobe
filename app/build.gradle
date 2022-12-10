@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
 
 
-
 }
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.dagger.hilt.android'
@@ -56,13 +55,14 @@ dependencies {
 
     //dagger 2
     implementation group: 'com.google.dagger', name: 'dagger', version: '2.0'
-    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.10.0'
+
 
     //hilt
     implementation 'com.google.dagger:hilt-android:2.44.2'
     annotationProcessor 'com.google.dagger:hilt-compiler:2.44.2'
 
     //OkHttp interceptor
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
     //rxjava
