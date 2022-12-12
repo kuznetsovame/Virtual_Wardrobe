@@ -36,18 +36,20 @@ public class SignInViewModel extends ViewModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(value -> {
+
                     this.user.setValue(value);
                 }, throwable -> {
                     HttpException exception = (HttpException) throwable;
+                    toastText.setValue(throwable.getMessage());
 
-                    switch (exception.code())
-                    {
-                        case 400:
-                                toastText.setValue(throwable.getMessage());
-                            break;
-                        default:
-                            toastText.setValue(throwable.getMessage());
-                    }
+//                    switch (exception.code())
+//                    {
+//                        case 400:
+//                                toastText.setValue(throwable.getMessage());
+//                            break;
+//                        default:
+//                            toastText.setValue(throwable.getMessage());
+//                    }
                 });
         return true;
     }

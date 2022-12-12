@@ -3,9 +3,9 @@ package com.example.virtualwardrobe.screens;
 import android.os.Bundle;
 
 import com.example.virtualwardrobe.R;
+import com.example.virtualwardrobe.databinding.ActivityMenuBinding;
 import com.example.virtualwardrobe.model.User;
-import com.example.virtualwardrobe.screens.profile.ProfileType;
-import com.example.virtualwardrobe.screens.startactivity.StartActivity;
+import com.example.virtualwardrobe.model.ProfileType;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,12 +14,13 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.virtualwardrobe.databinding.ActivityMenuBinding;
+
 
 public class MenuActivity extends AppCompatActivity {
 
+
     private ActivityMenuBinding binding;
-    StartActivity startActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +33,8 @@ public class MenuActivity extends AppCompatActivity {
         // menu should be considered as top level destinations.
 
         Bundle arguments = getIntent().getExtras();
-        Bundle bundle = new Bundle() ;
+        Bundle bundle = new Bundle();
+
         bundle.putSerializable("type", ProfileType.MAIN_USER);
         bundle.putParcelable("user",(User) arguments.get("user_bundle"));
 

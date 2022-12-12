@@ -15,6 +15,9 @@ public class User implements Parcelable {
     @SerializedName("password")
     public String password;
 
+    public ProfileType type;
+
+
     public String getMail() {
         return mail;
     }

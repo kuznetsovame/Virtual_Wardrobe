@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import com.example.virtualwardrobe.R;
 import com.example.virtualwardrobe.adapters.UsersAdapter;
 import com.example.virtualwardrobe.model.User;
-import com.example.virtualwardrobe.screens.profile.ProfileType;
+import com.example.virtualwardrobe.model.ProfileType;
 
 import java.util.Arrays;
 
@@ -38,14 +38,13 @@ public class List_Fragment extends Fragment implements UsersAdapter.OnClick{
         recyclerView = root.findViewById(R.id.recyclerView);
 
         mViewModel = new ViewModelProvider(this).get(ListViewModel.class);
-        User fr[] = (User[]) getArguments().getParcelableArray("friends");
+        User users[] = (User[]) getArguments().getParcelableArray("users");
 
-        UsersAdapter usersAdapter = new UsersAdapter(Arrays.asList(fr),this);
+        UsersAdapter usersAdapter = new UsersAdapter(Arrays.asList(users),this);
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(usersAdapter);
-
 
         return root;
     }

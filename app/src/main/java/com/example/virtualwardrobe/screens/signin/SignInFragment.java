@@ -50,7 +50,8 @@ public class SignInFragment extends Fragment {
             //activity.show();
         });
         viewModel.text.observe(getViewLifecycleOwner(), s -> binding.button.setText(s));
-        viewModel.toastText.observe(getViewLifecycleOwner(), s -> Toast.makeText(getContext(),s,Toast.LENGTH_LONG));
+        viewModel.toastText.observe(getViewLifecycleOwner(),
+                s -> Toast.makeText(getContext(),s,Toast.LENGTH_LONG));
 
         viewModel.user.observe(getViewLifecycleOwner(), user -> {
             activity.show(user);

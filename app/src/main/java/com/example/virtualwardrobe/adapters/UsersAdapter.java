@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.virtualwardrobe.R;
+import com.example.virtualwardrobe.model.ProfileType;
 import com.example.virtualwardrobe.model.User;
 import com.example.virtualwardrobe.screens.list.List_Fragment;
 
@@ -39,12 +40,25 @@ public class UsersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
+        User user = list.get(position);
         TextView status = holder.itemView.findViewById(R.id.user_status);
         TextView name = holder.itemView.findViewById(R.id.user_name);
-        name.setText(list.get(position).username);
-        status.setText(list.get(position).mail);
-        holder.itemView.setOnClickListener(view -> onClick.onClickUserCard(list.get(position)));
+        name.setText(user.username);
+        status.setText(user.mail);
+        holder.itemView.setOnClickListener(view -> onClick.onClickUserCard(user));
+        if(user.type == ProfileType.FRIEND)
+        {
+            ((TextView)(holder.itemView.findViewById(R.id.tv_add))).setText("-");
+        } else if(user.type == ProfileType.NOT_FRIEND)
+        {
+            ((TextView)(holder.itemView.findViewById(R.id.tv_add))).setText("+");
+
+        }
+        holder.itemView.findViewById(R.id.tv_add).setOnClickListener(view ->
+        {
+
+        });
+
     }
 
 

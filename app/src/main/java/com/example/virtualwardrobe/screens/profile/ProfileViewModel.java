@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.virtualwardrobe.model.ProfileType;
 import com.example.virtualwardrobe.model.User;
 import com.example.virtualwardrobe.network.WardrobeApi;
 
@@ -12,30 +13,32 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class ProfileViewModel extends ViewModel {
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
-    @Inject
+public class ProfileViewModel extends ViewModel {
     WardrobeApi wardrobeApi;
 
     private final MutableLiveData<String> mText;
     private final MutableLiveData<User> user;
-    private final MutableLiveData<ArrayList<User>> friends;
+    private final MutableLiveData<List<User>> friends;
 
-    public ProfileViewModel() {
+    public ProfileViewModel(WardrobeApi wardrobeApi) {
         mText = new MutableLiveData<>();
 
         mText.setValue("This is home fragment");
         user = new MutableLiveData<>();
         friends = new MutableLiveData<>();
-        test();
-        //user.setValue(wardrobeApi.getUserById(0));
+        this.wardrobeApi = wardrobeApi;
+
     }
 
     public void addFriend() {
         //wardrobeApi.sendFriedRequest();
     }
 
-    public LiveData<ArrayList<User>> getFriends() {
+    public LiveData<List<User>> getFriends() {
         return friends;
     }
 
@@ -49,20 +52,34 @@ public class ProfileViewModel extends ViewModel {
 
     public void setUser(User user) {
         this.user.setValue(user);
+        initFirend();
     }
 
     public  LiveData<User> getUser() {
         return user;
     }
 
+    private void initFirend() {
+        if(user.getValue() == null)
+            return;
+        User value1 = user.getValue();
+        wardrobeApi.getFriends(value1)
+                .subscribeOn(Schedulers.computation())
+                .map(users -> {
+                    for (User it : users) {
+                        it.type = ProfileType.FRIEND;
+                    }
+                    return users;
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(value->{
+                    friends.setValue(value);
 
-    public void test(){
-        ArrayList<User> list = new ArrayList<>();
+                },throwable -> {
 
-        for(int i=0; i< 10;i++)
-            list.add(new User("" + i, "asdasd" + i));
+                });
 
-        friends.setValue(list);
     }
+
 
 }

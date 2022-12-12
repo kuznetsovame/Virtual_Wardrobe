@@ -20,7 +20,7 @@ import com.example.virtualwardrobe.screens.signin.SignInFragment;
 public class SignUpFragment extends Fragment {
 
 
-   private SignInOnClick activity;
+    private SignInOnClick activity;
 
     private SingUpViewModel viewModel;
 
@@ -52,14 +52,16 @@ public class SignUpFragment extends Fragment {
 
         WardrobeApplication application = (WardrobeApplication) getActivity().getApplication();
 
-
         binding.button.setOnClickListener(view -> {
             if (checkLogPas()) {
-                if (viewModel.reg(application.getWardrobeApi(), binding.login.getText().toString(), binding.password.getText().toString(),binding.mail.getText().toString())) {
+                if (viewModel.reg(application.getWardrobeApi(), binding.login.getText().toString(), binding.password.getText().toString(), binding.mail.getText().toString())) {
 
                 }
             }
         });
+
+
+
 
         return binding.getRoot();
     }
@@ -67,7 +69,7 @@ public class SignUpFragment extends Fragment {
     private boolean checkLogPas() {
         if (binding.password.getText().length() < 6 && binding.password.getText().length() > 20)
             return false;
-        if(!binding.confirm.getText().toString().equals(binding.password.getText().toString()))
+        if (!binding.confirm.getText().toString().equals(binding.password.getText().toString()))
             return false;
 
         //TODO:  eMail
@@ -76,8 +78,7 @@ public class SignUpFragment extends Fragment {
     }
 
 
-    public interface SignInOnClick extends SignInFragment.ShowMainActivity
-    {
+    public interface SignInOnClick extends SignInFragment.ShowMainActivity {
         public void onClickSignIn();
     }
 }

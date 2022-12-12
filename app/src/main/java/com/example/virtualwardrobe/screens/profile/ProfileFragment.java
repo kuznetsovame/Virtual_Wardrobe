@@ -1,7 +1,5 @@
 package com.example.virtualwardrobe.screens.profile;
 
-import static com.example.virtualwardrobe.screens.profile.ProfileType.*;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,17 +7,17 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.virtualwardrobe.R;
+import com.example.virtualwardrobe.WardrobeApplication;
 import com.example.virtualwardrobe.databinding.FragmentProfileBinding;
+import com.example.virtualwardrobe.model.ProfileType;
 import com.example.virtualwardrobe.model.User;
-import com.example.virtualwardrobe.screens.list.List_Fragment;
+import com.example.virtualwardrobe.screens.startactivity.ModelFactory;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileFragment extends Fragment {
 
@@ -27,23 +25,33 @@ public class ProfileFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
+        WardrobeApplication application = (WardrobeApplication) getActivity().getApplication();
+
         ProfileViewModel viewModel =
-                new ViewModelProvider(this).get(ProfileViewModel.class);
+                new ViewModelProvider(this, (ViewModelProvider.Factory) new ModelFactory(application.getWardrobeApi())).get(ProfileViewModel.class);
 
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
 
-        viewModel.setUser((User) getArguments().get("user"));
-        setType((ProfileType) getArguments().get("type"));
+        User _user = (User) getArguments().get("user");
+        if(_user!= null) {
+            viewModel.setUser(_user);
+            setType((ProfileType) getArguments().get("type"));
+        }
+
 
         viewModel.getUser().observe(getViewLifecycleOwner(), user -> binding.tvUsername.setText(user.getUsername()));
         viewModel.getFriends().observe(getViewLifecycleOwner(), friends -> binding.tvCountFriends.setText("" + friends.size()));
 
+        viewModel.getFriends().observe(getViewLifecycleOwner(),users -> {
+            binding.tvCountFriends.setText("" + users.size());
+        });
 
         binding.linearLayout2.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
-            ArrayList<User> newArray = viewModel.getFriends().getValue();
+            List<User> newArray = viewModel.getFriends().getValue();
 
             User user[] = new User[newArray.size()];
             int i=0;
@@ -53,7 +61,7 @@ public class ProfileFragment extends Fragment {
                 i++;
             }
 
-            bundle.putParcelableArray("friends", user);
+            bundle.putParcelableArray("users", user);
             Navigation.findNavController(root).navigate(R.id.list_Fragment, bundle);
             //Navigation.findNavController(this, R.id.nav_host_fragment_activity_menu);
         });
