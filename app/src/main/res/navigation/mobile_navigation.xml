@@ -54,5 +54,7 @@
         <action
             android:id="@+id/action_addClothe_to_navigation_wardrobe"
             app:destination="@id/navigation_wardrobe" />
+        <argument android:name="uri"
+            app:argType="android.net.Uri" />
     </fragment>
 </navigation>

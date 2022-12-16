@@ -67,7 +67,7 @@ public class WardrobeModule {
     @Singleton
     public Retrofit wardrobeApi(OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
-                .baseUrl("http://192.168.55.105:8080")
+                .baseUrl("http://192.168.55.104:8080")
               //  .baseUrl(" https://questgotest.getsandbox.com:443")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())

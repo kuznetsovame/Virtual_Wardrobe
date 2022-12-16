@@ -1,4 +1,4 @@
-package com.example.virtualwardrobe.model;
+package com.example.virtualwardrobe.screens.profile;
 
 import android.os.Parcelable;
 

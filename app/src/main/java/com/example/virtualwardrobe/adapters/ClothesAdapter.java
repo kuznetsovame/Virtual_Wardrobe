@@ -1,10 +1,8 @@
 package com.example.virtualwardrobe.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,13 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.virtualwardrobe.R;
-import com.example.virtualwardrobe.model.Clothes;
+import com.example.virtualwardrobe.model.Clothe;
 
 import java.util.List;
 
 public class ClothesAdapter extends RecyclerView.Adapter {
 
-    List<Clothes> list;
+    List<Clothe> list;
 
     class MyHolderView extends RecyclerView.ViewHolder {
         public MyHolderView(@NonNull View itemView) {
@@ -35,7 +33,7 @@ public class ClothesAdapter extends RecyclerView.Adapter {
         ImageView photo;
     }
 
-    public ClothesAdapter(  List<Clothes> list) {
+    public ClothesAdapter(  List<Clothe> list) {
 
         this.list = list;
 

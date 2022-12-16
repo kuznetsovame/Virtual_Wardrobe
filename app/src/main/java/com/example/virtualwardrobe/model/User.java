@@ -3,6 +3,7 @@ package com.example.virtualwardrobe.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.virtualwardrobe.screens.profile.ProfileType;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

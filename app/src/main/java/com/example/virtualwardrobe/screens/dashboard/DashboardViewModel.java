@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.virtualwardrobe.model.ProfileType;
 import com.example.virtualwardrobe.model.User;
 import com.example.virtualwardrobe.network.WardrobeApi;
+import com.example.virtualwardrobe.screens.profile.ProfileType;
 
 import java.util.List;
 
