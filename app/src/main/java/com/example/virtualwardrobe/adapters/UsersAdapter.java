@@ -1,20 +1,15 @@
 package com.example.virtualwardrobe.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.virtualwardrobe.R;
-import com.example.virtualwardrobe.model.ProfileType;
 import com.example.virtualwardrobe.model.User;
-import com.example.virtualwardrobe.screens.list.List_Fragment;
+import com.example.virtualwardrobe.screens.profile.ProfileType;
 
 import java.util.List;
 

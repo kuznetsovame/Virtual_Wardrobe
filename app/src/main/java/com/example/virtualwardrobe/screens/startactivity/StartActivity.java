@@ -32,6 +32,7 @@ public class StartActivity extends AppCompatActivity implements SignInFragment.o
 
 
         viewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) new ModelFactory()).get(StartViewModel.class);
+
         if (savedInstanceState == null) {
             signIn = SignInFragment.newInstance(this);
             signUp = SignUpFragment.newInstance(this);

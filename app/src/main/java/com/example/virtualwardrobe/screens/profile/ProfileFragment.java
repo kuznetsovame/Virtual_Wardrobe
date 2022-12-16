@@ -13,7 +13,6 @@ import androidx.navigation.Navigation;
 import com.example.virtualwardrobe.R;
 import com.example.virtualwardrobe.WardrobeApplication;
 import com.example.virtualwardrobe.databinding.FragmentProfileBinding;
-import com.example.virtualwardrobe.model.ProfileType;
 import com.example.virtualwardrobe.model.User;
 import com.example.virtualwardrobe.screens.startactivity.ModelFactory;
 

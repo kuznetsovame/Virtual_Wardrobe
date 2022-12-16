@@ -39,8 +39,13 @@ public class SignInViewModel extends ViewModel {
 
                     this.user.setValue(value);
                 }, throwable -> {
-                    HttpException exception = (HttpException) throwable;
-                    toastText.setValue(throwable.getMessage());
+
+                    if(throwable instanceof HttpException )
+                    {
+                        HttpException exception = (HttpException) throwable;
+                        toastText.setValue(throwable.getMessage());
+                    }
+
 
 //                    switch (exception.code())
 //                    {
