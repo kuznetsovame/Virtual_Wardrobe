@@ -1,5 +1,6 @@
 package com.example.virtualwardrobe.adapters;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +54,7 @@ public class ClothesAdapter extends RecyclerView.Adapter {
         view.name.setText(list.get(position).name);
         view.descriptionText.setText(list.get(position).description);
         view.type.setText(list.get(position).category);
-
+        view.photo.setImageURI(Uri.parse(list.get(position).image));
 
     }
 

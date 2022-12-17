@@ -1,31 +1,25 @@
-package com.example.virtualwardrobe.screens.profile;
+package com.example.virtualwardrobe.screens.mainprofile;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.virtualwardrobe.model.User;
-import com.example.virtualwardrobe.network.WardrobeApi;
 
 import java.util.List;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.core.Single;
 
-public class ProfileViewModel extends ViewModel {
-    WardrobeApi wardrobeApi;
+public class MainProfileViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+
     private final MutableLiveData<User> user;
     private final MutableLiveData<List<User>> friends;
 
-    public ProfileViewModel(WardrobeApi wardrobeApi) {
-        mText = new MutableLiveData<>();
-
-        mText.setValue("This is home fragment");
+    public MainProfileViewModel() {
         user = new MutableLiveData<>();
         friends = new MutableLiveData<>();
-        this.wardrobeApi = wardrobeApi;
+
 
     }
 
@@ -37,9 +31,7 @@ public class ProfileViewModel extends ViewModel {
         return friends;
     }
 
-    public LiveData<String> getText() {
-        return mText;
-    }
+
 
 //    public List<User> showFriends() {
 //        return (List<User>) wardrobeApi.getFriends(new User());
@@ -50,17 +42,23 @@ public class ProfileViewModel extends ViewModel {
         initFirend();
     }
 
-    public  LiveData<User> getUser() {
+    public LiveData<User> getUser() {
         return user;
     }
 
     private void initFirend() {
-        if(user.getValue() == null)
+        if (user.getValue() == null)
             return;
         User value1 = user.getValue();
 
 
     }
 
-
+    public void setFriends(Single<List<User>> friends) {
+        friends.subscribe(
+                users -> {
+                    this.friends.setValue(users);
+                }
+        );
+    }
 }

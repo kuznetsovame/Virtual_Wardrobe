@@ -1,32 +1,23 @@
-package com.example.virtualwardrobe;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.lifecycle.ViewModelProvider;
+package com.example.virtualwardrobe.screens.clotheadd;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.activity.*;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.example.virtualwardrobe.databinding.FragmentAddClotheBinding;
+import com.example.virtualwardrobe.model.Clothe;
 import com.example.virtualwardrobe.screens.MenuActivity;
 import com.github.dhaval2404.imagepicker.ImagePicker;
-import com.github.dhaval2404.imagepicker.ImagePickerActivity;
-
-import java.util.Arrays;
 
 public class AddClothe extends Fragment {
 
@@ -37,25 +28,37 @@ public class AddClothe extends Fragment {
     }
 
     private FragmentAddClotheBinding binding;
+    private Uri uri = null;
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        if (requestCode == ImagePicker.REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            binding.image.setImageURI(data.getData());
+            uri = data.getData();
+        }
+
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentAddClotheBinding.inflate(inflater, container, false);
 
-        Uri uri = (Uri) getArguments().get("uri");
-        if(uri != null)
-        {
-            binding.image.setImageURI(uri);
-        }
 
         binding.btnSave.setOnClickListener(view -> {
-            Intent intent = new Intent();
-            intent.putExtra("type", binding.type.getItemAtPosition((int) binding.type.getSelectedItemPosition()).toString());
-            intent.putExtra("name", binding.etName.getText().toString());
-            intent.putExtra("description", binding.etDescription.getText().toString());
-            ((MenuActivity) getActivity()).onActivityResult(120, Activity.RESULT_OK, intent);
-            getParentFragment().getParentFragmentManager().popBackStack();
+            if (uri == null || binding.etName.getText().toString().isEmpty() || binding.etDescription.getText().toString().isEmpty())
+                return;
+
+            Clothe clothe = new Clothe();
+            clothe.category = binding.type.getItemAtPosition((int) binding.type.getSelectedItemPosition()).toString();
+            clothe.name = binding.etName.getText().toString();
+            clothe.description = binding.etDescription.getText().toString();
+            clothe.image = uri.getPath();
+
+            ((MenuActivity) requireActivity()).clothes.getValue().add(clothe);
+            Navigation.findNavController(getView()).popBackStack();
         });
 
         binding.btnBack.setOnClickListener(view -> {
@@ -69,14 +72,14 @@ public class AddClothe extends Fragment {
     }
 
 
-
-
     private void getImage() {
-        ImagePicker.Companion.with(getActivity())
+        ImagePicker.Companion.with(this)
                 .galleryOnly()
                 .galleryMimeTypes(new String[]{"image/*"})//User can only select image from Gallery
                 .crop()
-                .maxResultSize(1080, 1080)
+                .maxResultSize(512, 512)
                 .start();
     }
+
+
 }

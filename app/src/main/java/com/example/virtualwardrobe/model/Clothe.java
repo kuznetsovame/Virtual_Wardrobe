@@ -1,5 +1,6 @@
 package com.example.virtualwardrobe.model;
 
+import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -8,6 +9,9 @@ public class Clothe implements Parcelable {
     public String name;
     public String image;
     public String description;
+    public String category;
+
+
 
     public String getName() {
         return name;
@@ -41,7 +45,6 @@ public class Clothe implements Parcelable {
         this.category = category;
     }
 
-    public String category;
 
     @Override
     public int describeContents() {

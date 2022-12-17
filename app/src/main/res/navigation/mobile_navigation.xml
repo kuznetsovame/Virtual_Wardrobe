@@ -3,35 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/navigation_profile">
-
-    <fragment
-        android:id="@+id/navigation_profile"
-        android:name="com.example.virtualwardrobe.screens.profile.ProfileFragment"
-        android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile">
-        <argument
-            android:name="user"
-            app:argType="com.example.virtualwardrobe.model.User" />
-        <argument
-            android:name="type"
-            app:argType="com.example.virtualwardrobe.screens.profile.ProfileType" />
-        <action
-            android:id="@+id/action_navigation_profile_to_list_Fragment"
-            app:destination="@id/list_Fragment"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:launchSingleTop="true" />
-    </fragment>
+    app:startDestination="@id/mainProfile">
 
     <fragment
         android:id="@+id/navigation_wardrobe"
         android:name="com.example.virtualwardrobe.screens.wardrobe.WardrobeFragment"
         android:label="@string/title_wardrobe"
-        tools:layout="@layout/fragment_wardrobe" >
+        tools:layout="@layout/fragment_wardrobe">
+
         <action
             android:id="@+id/action_navigation_wardrobe_to_addClothe"
             app:destination="@id/addClothe"
-            app:launchSingleTop="true" />
+
+            />
     </fragment>
     <fragment
         android:id="@+id/list_Fragment"
@@ -40,6 +24,9 @@
         <argument
             android:name="friends"
             app:argType="com.example.virtualwardrobe.model.User[]" />
+        <action
+            android:id="@+id/action_list_Fragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
@@ -48,13 +35,20 @@
         tools:layout="@layout/fragment_main" />
     <fragment
         android:id="@+id/addClothe"
-        android:name="com.example.virtualwardrobe.AddClothe"
+        android:name="com.example.virtualwardrobe.screens.clotheadd.AddClothe"
         android:label="fragment_add_clothe"
-        tools:layout="@layout/fragment_add_clothe" >
+        tools:layout="@layout/fragment_add_clothe" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.virtualwardrobe.screens.profile.ProfileFragment"
+        android:label="fragment_main_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/mainProfile"
+        android:name="com.example.virtualwardrobe.screens.mainprofile.MainProfile"
+        android:label="MainProfile" >
         <action
-            android:id="@+id/action_addClothe_to_navigation_wardrobe"
-            app:destination="@id/navigation_wardrobe" />
-        <argument android:name="uri"
-            app:argType="android.net.Uri" />
+            android:id="@+id/action_mainProfile_to_list_Fragment"
+            app:destination="@id/list_Fragment" />
     </fragment>
 </navigation>
