@@ -13,22 +13,15 @@ public class WardrobeViewModel extends ViewModel {
 
     MutableLiveData<List<Clothe>> clothes;
 
-    private final MutableLiveData<String> mText;
+
 
     public WardrobeViewModel() {
-        mText = new MutableLiveData<>();
+
         clothes = new MutableLiveData<>();
-
         clothes.setValue(new ArrayList<>());
-
-
-
-        mText.setValue("This is notifications fragment");
     }
 
-    public LiveData<String> getText() {
-        return mText;
-    }
+
 
     public void save(){
         //TODO

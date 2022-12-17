@@ -1,4 +1,4 @@
-package com.example.virtualwardrobe;
+package com.example.virtualwardrobe.screens.clotheadd;
 
 import androidx.lifecycle.ViewModel;
 

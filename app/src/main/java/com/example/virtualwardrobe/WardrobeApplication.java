@@ -3,6 +3,7 @@ package com.example.virtualwardrobe;
 import android.app.Application;
 
 import com.example.virtualwardrobe.network.WardrobeApi;
+import com.example.virtualwardrobe.repository.UserReopository;
 
 import javax.inject.Inject;
 
@@ -15,7 +16,13 @@ public class WardrobeApplication extends Application {
         return wardrobeApi;
     }
 
+    public UserReopository userReopository() {
+        return userReopository;
+    }
+
     @Inject
     WardrobeApi wardrobeApi;
+    @Inject
+    UserReopository userReopository;
 
 }

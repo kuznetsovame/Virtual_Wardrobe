@@ -57,7 +57,7 @@ public class List_Fragment extends Fragment implements UsersAdapter.OnClick{
         Bundle bundle = new Bundle();
         bundle.putParcelable("user",user);
         bundle.putSerializable("type", ProfileType.ANY_USER);
-        Navigation.findNavController(getView()).navigate(R.id.navigation_profile, bundle);
+        Navigation.findNavController(getView()).navigate(R.id.profileFragment, bundle);
 
     }
 
