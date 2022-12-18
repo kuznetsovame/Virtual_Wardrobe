@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.virtualwardrobe.R;
+import com.example.virtualwardrobe.WardrobeApplication;
 import com.example.virtualwardrobe.adapters.UsersAdapter;
 import com.example.virtualwardrobe.model.User;
 import com.example.virtualwardrobe.screens.profile.ProfileType;
@@ -24,7 +25,6 @@ import java.util.Arrays;
 
 public class List_Fragment extends Fragment implements UsersAdapter.OnClick{
     private RecyclerView recyclerView;
-    private ListViewModel mViewModel;
 
 
     public static List_Fragment newInstance() {
@@ -36,15 +36,30 @@ public class List_Fragment extends Fragment implements UsersAdapter.OnClick{
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_list_, container, false);
         recyclerView = root.findViewById(R.id.recyclerView);
-
-        mViewModel = new ViewModelProvider(this).get(ListViewModel.class);
-        User users[] = (User[]) getArguments().getParcelableArray("users");
-
-        UsersAdapter usersAdapter = new UsersAdapter(Arrays.asList(users),this);
-
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(usersAdapter);
+
+        WardrobeApplication application = (WardrobeApplication) getActivity().getApplication();
+        Bundle arguments = getArguments();
+
+        if(arguments.containsKey("user"))
+        {
+            application.userReopository().getFriends((User) arguments.get("user"))
+                    .subscribe(
+                            users -> {
+                                RecyclerView.Adapter adapter = new UsersAdapter( users ,this);
+                                recyclerView.setAdapter(adapter);
+                            }
+                    );
+
+        }
+        else
+        {
+
+        }
+
+
+
+
 
         return root;
     }
@@ -54,7 +69,9 @@ public class List_Fragment extends Fragment implements UsersAdapter.OnClick{
 
     @Override
     public void onClickUserCard(User user) {
+
         Bundle bundle = new Bundle();
+
         bundle.putParcelable("user",user);
         bundle.putSerializable("type", ProfileType.ANY_USER);
         Navigation.findNavController(getView()).navigate(R.id.profileFragment, bundle);

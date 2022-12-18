@@ -24,23 +24,22 @@ public class ProfileFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentProfileBinding.inflate(inflater, container, false);
 
         WardrobeApplication application = (WardrobeApplication) getActivity().getApplication();
 
         ProfileViewModel viewModel =
-                new ViewModelProvider(this, (ViewModelProvider.Factory) new ModelFactory(application.getWardrobeApi())).get(ProfileViewModel.class);
+                new ViewModelProvider(this, (ViewModelProvider.Factory) new ModelFactory(application.userReopository())).get(ProfileViewModel.class);
 
-        binding = FragmentProfileBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
 
 
         User _user = (User) getArguments().get("user");
         if(_user!= null) {
             viewModel.setUser(_user);
-            setType((ProfileType) getArguments().get("type"));
+
         }
 
-
+        viewModel.isFriend.observe(getViewLifecycleOwner(),v -> binding.button3.setText("Remove"));
         viewModel.getUser().observe(getViewLifecycleOwner(), user -> binding.tvUsername.setText(user.getUsername()));
         viewModel.getFriends().observe(getViewLifecycleOwner(), friends -> binding.tvCountFriends.setText("" + friends.size()));
 
@@ -48,27 +47,11 @@ public class ProfileFragment extends Fragment {
             binding.tvCountFriends.setText("" + users.size());
         });
 
-        binding.linearLayout2.setOnClickListener(view -> {
-            Bundle bundle = new Bundle();
-            List<User> newArray = viewModel.getFriends().getValue();
-
-            User user[] = new User[newArray.size()];
-            int i=0;
-
-            for (User u : newArray) {
-                user[i] = u;
-                i++;
-            }
-
-            bundle.putParcelableArray("users", user);
-            Navigation.findNavController(root).navigate(R.id.list_Fragment, bundle);
-            //Navigation.findNavController(this, R.id.nav_host_fragment_activity_menu);
+        binding.llFriends.setOnClickListener(view -> {
         });
 
-        //binding.linearLayout3.setOnClickListener(view -> viewModel.showFriends());
-        //binding.linearLayout3.setOnClickListener(view -> viewModel.showFriends());
 
-        return root;
+        return binding.getRoot();
     }
 
 

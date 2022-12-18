@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.virtualwardrobe.model.User;
+import com.example.virtualwardrobe.repository.UserReopository;
 
 import java.util.List;
 
@@ -16,9 +17,13 @@ public class MainProfileViewModel extends ViewModel {
     private final MutableLiveData<User> user;
     private final MutableLiveData<List<User>> friends;
 
-    public MainProfileViewModel() {
-        user = new MutableLiveData<>();
-        friends = new MutableLiveData<>();
+    private UserReopository userReopository;
+
+    public MainProfileViewModel(UserReopository userReopository) {
+        this.userReopository = userReopository;
+        user = new MutableLiveData<>(userReopository.getMainUser());
+        friends = new MutableLiveData<>(userReopository.getMainUserFriends());
+
 
 
     }

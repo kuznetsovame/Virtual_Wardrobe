@@ -41,10 +41,9 @@ public class MainProfile extends Fragment {
 
         WardrobeApplication application = (WardrobeApplication) getActivity().getApplication();
 
-        viewModel = new ViewModelProvider(this).get(MainProfileViewModel.class);
+        viewModel = new ViewModelProvider(this, (ViewModelProvider.Factory) new ModelFactory(application.userReopository()))
+                .get(MainProfileViewModel.class);
 
-        viewModel.setUser(application.userReopository().getMainUser());
-        viewModel.setFriends(application.userReopository().getFriends(viewModel.getUser().getValue()));
 
 
         viewModel.getUser().observe(getViewLifecycleOwner(),
@@ -52,7 +51,11 @@ public class MainProfile extends Fragment {
 
         viewModel.getFriends().observe(getViewLifecycleOwner(), friends -> binding.tvCountFriends.setText("" + friends.size()));
 
-
+        binding.llFriends.setOnClickListener(view -> {
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("user", viewModel.getUser().getValue());
+            Navigation.findNavController(getView()).navigate(R.id.list_Fragment, bundle);
+        });
 
 
 //        binding.linearLayout2.setOnClickListener(view -> {

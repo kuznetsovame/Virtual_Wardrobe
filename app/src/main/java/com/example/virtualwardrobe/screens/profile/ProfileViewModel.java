@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.virtualwardrobe.model.User;
 import com.example.virtualwardrobe.network.WardrobeApi;
+import com.example.virtualwardrobe.repository.UserReopository;
 
 import java.util.List;
 
@@ -13,19 +14,20 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class ProfileViewModel extends ViewModel {
-    WardrobeApi wardrobeApi;
+    UserReopository userReopository;
 
     private final MutableLiveData<String> mText;
     private final MutableLiveData<User> user;
     private final MutableLiveData<List<User>> friends;
+    public final MutableLiveData<Boolean> isFriend;
 
-    public ProfileViewModel(WardrobeApi wardrobeApi) {
+    public ProfileViewModel(UserReopository userReopository) {
         mText = new MutableLiveData<>();
-
+        isFriend = new MutableLiveData<>(false );
         mText.setValue("This is home fragment");
         user = new MutableLiveData<>();
         friends = new MutableLiveData<>();
-        this.wardrobeApi = wardrobeApi;
+        this.userReopository = userReopository;
 
     }
 
@@ -47,19 +49,30 @@ public class ProfileViewModel extends ViewModel {
 
     public void setUser(User user) {
         this.user.setValue(user);
-        initFirend();
+        User main = userReopository.getMainUser();
+        userReopository.getFriends(user)
+                .subscribe(users -> {
+                    friends.setValue(users);
+                    for (User u : friends.getValue()) {
+                        if(main.mail.equals(u.mail))
+                        {
+                            isFriend.setValue(true);
+                            break;
+                        }
+                    }
+                });
+
+
     }
 
-    public  LiveData<User> getUser() {
+    public LiveData<User> getUser() {
         return user;
     }
 
     private void initFirend() {
-        if(user.getValue() == null)
+        if (user.getValue() == null)
             return;
         User value1 = user.getValue();
-
-
     }
 
 
