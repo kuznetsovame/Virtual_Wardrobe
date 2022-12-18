@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -17,13 +16,17 @@ public class UserReopository {
 
     private User mainUser = null;
     private List<User> userList;
+    private List<User> friends;
+
     private WardrobeApi wardrobeApi;
 
 
     public UserReopository(WardrobeApi wardrobeApi) {
         this.wardrobeApi = wardrobeApi;
         updateUsers();
+
         userList = new ArrayList<>();
+        friends = new ArrayList<>();
     }
 
     public User getMainUser() {
@@ -32,10 +35,10 @@ public class UserReopository {
 
     public void setMainUser(User mainUser) {
         this.mainUser = mainUser;
+        updateMainFriends();
     }
 
     public List<User> getUserList() {
-
         return userList;
     }
 
@@ -58,15 +61,35 @@ public class UserReopository {
                 });
     }
 
+    public void updateMainFriends() {
+         wardrobeApi.getFriends(mainUser)
+                .subscribeOn(Schedulers.computation())
+                .map(users -> {
+                    for (User it : users) {
+                        it.type = ProfileType.FRIEND;
+                    }
+                    return users;
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                 .subscribe(users -> {
+                     friends.clear();
+                     friends.addAll(users);
+                 });
+    }
+
+    public List<User> getMainUserFriends() {
+        return friends;
+    }
+
     public  Single<List<User>> getFriends(User user) {
         List<User> friends = new ArrayList<>();
         if (mainUser != null)
            return wardrobeApi.getFriends(mainUser)
                     .subscribeOn(Schedulers.computation())
                     .map(users -> {
-                        for (User it : users) {
-                            it.type = ProfileType.FRIEND;
-                        }
+//                        for (User it : users) {
+//                            it.type = ProfileType.FRIEND;
+//                        }
                         return users;
                     })
                     .observeOn(AndroidSchedulers.mainThread());

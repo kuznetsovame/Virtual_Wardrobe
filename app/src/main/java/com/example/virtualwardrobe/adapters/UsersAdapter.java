@@ -41,18 +41,7 @@ public class UsersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         name.setText(user.username);
         status.setText(user.mail);
         holder.itemView.setOnClickListener(view -> onClick.onClickUserCard(user));
-        if(user.type == ProfileType.FRIEND)
-        {
-            ((TextView)(holder.itemView.findViewById(R.id.tv_add))).setText("-");
-        } else if(user.type == ProfileType.NOT_FRIEND)
-        {
-            ((TextView)(holder.itemView.findViewById(R.id.tv_add))).setText("+");
 
-        }
-        holder.itemView.findViewById(R.id.tv_add).setOnClickListener(view ->
-        {
-
-        });
 
     }
 

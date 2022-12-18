@@ -35,8 +35,6 @@ public class DashboardViewModel extends ViewModel {
     }
 
     private void initUser() {
-
-
         wardrobeApi.getAllUsers()
                 .subscribeOn(Schedulers.computation())
                 .map(users -> {
